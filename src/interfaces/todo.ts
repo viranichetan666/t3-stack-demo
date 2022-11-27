@@ -3,7 +3,6 @@ export type TaskType = {
   name: string;
   description: string;
   checked: boolean;
-  isExpanded: boolean;
   todoItem: SubTaskType[];
 };
   

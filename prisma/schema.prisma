@@ -26,6 +26,5 @@ model TaskModel {
   name        String         @db.VarChar(200)
   description String         @db.VarChar(500)
   checked     Boolean        @default(false)
-  isExpanded  Boolean        @default(false)
   todoItem    SubTaskModel[]
 }

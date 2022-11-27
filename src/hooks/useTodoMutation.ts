@@ -1,32 +1,20 @@
+import { TaskType } from "../interfaces/todo";
 import { trpc } from "../utils/trpc";
 
-export type TaskType = {
-  id: string;
-  name: string;
-  description: string;
-  checked: boolean;
-  isExpanded: boolean;
-  todoItem: any;
-};
-
-export type SubTaskType = {
-  id: string;
-  name: string;
-  checked: boolean;
-  taskId: string;
-};
-
 export const useTodoMutation = (
-  routerPath: any,
+  mutationName: any,
   callback: (
     TodoItem: TaskType[] | undefined,
     params: any
-  ) => TaskType[] | undefined
+  ) => TaskType[] | undefined,
+  invalidateQueries: boolean = false,
 ) => {
   const trpcContext = trpc.useContext();
-  return trpc.useMutation([routerPath], {
+  return trpc.useMutation([mutationName], {
     onSuccess() {
-      trpcContext.invalidateQueries(["task.getAllTasks"]);
+      if(invalidateQueries) {
+        trpcContext.invalidateQueries(["task.getAllTasks"]);
+      }
     },
     onMutate(params) {
       trpcContext.cancelQuery(["task.getAllTasks"]);

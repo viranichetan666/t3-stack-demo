@@ -23,7 +23,8 @@ const TodoApp: FC = () => {
     "task.addTask",
     (oldItems, params) => {
       return oldItems ? [...oldItems, params] : [params];
-    }
+    },
+    true
   );
 
   // Add Subtask handler
@@ -39,7 +40,8 @@ const TodoApp: FC = () => {
         }
         return taskItem;
       });
-    }
+    },
+    true
   );
 
   // Delete main task handler
