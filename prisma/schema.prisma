@@ -1,0 +1,31 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["referentialIntegrity"]
+}
+
+datasource db {
+  provider             = "mysql"
+  url                  = env("DATABASE_URL")
+  shadowDatabaseUrl    = env("SHADOW_DATABASE_URL")
+  referentialIntegrity = "prisma"
+}
+
+model SubTaskModel {
+  id       String    @id @default(cuid())
+  name     String    @db.VarChar(200)
+  checked  Boolean   @default(false)
+  taskItem TaskModel @relation(fields: [taskId], references: [id], onDelete: Cascade)
+  taskId   String
+}
+
+model TaskModel {
+  id          String         @id @default(cuid())
+  name        String         @db.VarChar(200)
+  description String         @db.VarChar(500)
+  checked     Boolean        @default(false)
+  isExpanded  Boolean        @default(false)
+  todoItem    SubTaskModel[]
+}
