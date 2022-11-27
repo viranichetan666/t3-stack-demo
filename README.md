@@ -2,6 +2,12 @@
 
 This is an app bootstrapped according to the [init.tips](https://init.tips) stack, also known as the T3-Stack.
 
+# Command
+
+yarn
+
+yarn dev
+
 ## What's next? How do I make an app with this?
 
 We try to keep this project as simple as possible, so you can start with the most basic configuration and then move on to more advanced configuration.
